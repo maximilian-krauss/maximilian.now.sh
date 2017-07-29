@@ -1,0 +1,17 @@
+//native
+const path = require('path');
+
+//packages
+const { readFileAsync } = require('fs-extra-promise');
+const { send } = require('micro');
+
+module.exports = (fileName) => {
+    return async (req, res) => {
+        const filePath = path.join('./html', fileName);
+        res.setHeader('Content-Type', 'text/html');
+
+        const fileContents = await readFileAsync(filePath, 'utf-8');
+
+        return send(res, 200, fileContents);
+    }
+}
