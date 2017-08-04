@@ -5,17 +5,21 @@
   "author": "Maximilian Krauß <max@krauss.io>",
   "license": "MIT",
   "scripts": {
-    "start": "micro"
+    "start": "micro",
+    "dev": "micro-dev"
   },
   "dependencies": {
     "fs-extra-promise": "^1.0.1",
-    "micro": "^7.3.3",
+    "micro": "^8.0.1",
     "micro-visualize": "^3.0.1",
     "microrouter": "^2.2.1",
     "mime-types": "^2.1.16"
   },
   "now": {
     "name": "maximilian",
-    "alias": "maximilian"
+    "alias": "krauss.io"
+  },
+  "devDependencies": {
+    "micro-dev": "^1.1.0"
   }
 }
