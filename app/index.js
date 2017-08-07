@@ -1,12 +1,14 @@
 // packages
 const { send } = require('micro');
-const { router, get } = require('microrouter');
-const visualize = require('micro-visualize');
+const Router = require('router');
+const finalhandler = require('finalhandler');
 
 // ours
 const static = require('./micro-static');
 const html = require('./serve-html');
 const socialServices = require('../social.json');
+
+const router = new Router();
 
 const serveNotFound = (req, res) => send(res, 404, { error: 'Not found' });
 
@@ -22,11 +24,13 @@ const goSocial = (req, res) => {
     return send(res, 302, url);
 };
 
-module.exports = router(
-    visualize(get('/', html('index.html'))),
-    visualize(get('/on/:social', goSocial)),
-    visualize(static({
-        source: './assets'
-    })),
-    visualize(get('/*', serveNotFound))
-);
+router.get('/', html('index.html'));
+router.get('/on/:social', goSocial);
+router.get('/static/:asset', static({
+    source: './assets'
+}));
+router.get('/*', serveNotFound);
+
+module.exports = (req, res) => {
+    router(req, res, finalhandler(req, res));
+}
