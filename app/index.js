@@ -3,8 +3,8 @@ const { send } = require('micro');
 const Router = require('router');
 const finalhandler = require('finalhandler');
 
-// ours
-const static = require('./micro-static');
+// mine
+const serveStatic = require('./micro-static');
 const html = require('./serve-html');
 const socialServices = require('../social.json');
 
@@ -26,7 +26,7 @@ const goSocial = (req, res) => {
 
 router.get('/', html('index.html'));
 router.get('/on/:social', goSocial);
-router.get('/static/:asset', static({
+router.get('/static/:asset', serveStatic({
     source: './assets'
 }));
 router.get('/*', serveNotFound);
