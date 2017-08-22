@@ -1,6 +1,5 @@
 //native
 const path = require('path');
-const { parse } = require('url');
 
 //packages
 const { existsAsync, readFileAsync } = require('fs-extra-promise');

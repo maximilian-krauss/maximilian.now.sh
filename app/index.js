@@ -7,6 +7,7 @@ const finalhandler = require('finalhandler');
 const serveStatic = require('./micro-static');
 const html = require('./serve-html');
 const socialServices = require('../social.json');
+const tracker = require('./tracker');
 
 const router = new Router();
 
@@ -29,8 +30,10 @@ router.get('/on/:social', goSocial);
 router.get('/static/:asset', serveStatic({
     source: './assets'
 }));
+router.get('/clicks', tracker.deliver);
 router.get('/*', serveNotFound);
 
 module.exports = (req, res) => {
+    tracker.track(req);
     router(req, res, finalhandler(req, res));
 }
