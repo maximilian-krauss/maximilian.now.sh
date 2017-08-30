@@ -1,9 +1,10 @@
-//native
+// native
 const path = require('path');
 
-//packages
+// packages
 const { readFileAsync } = require('fs-extra-promise');
 const { send } = require('micro');
+const compress = require('micro-compress');
 
 module.exports = (fileName) => {
     return async (req, res) => {
@@ -12,6 +13,6 @@ module.exports = (fileName) => {
 
         const fileContents = await readFileAsync(filePath, 'utf-8');
 
-        return send(res, 200, fileContents);
+        return compress(send(res, 200, fileContents));
     }
 }

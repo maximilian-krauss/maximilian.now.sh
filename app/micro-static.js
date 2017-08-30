@@ -1,11 +1,12 @@
-//native
+// native
 const path = require('path');
 
-//packages
+// packages
 const { existsAsync, readFileAsync } = require('fs-extra-promise');
 const mime = require('mime-types');
 const { send } = require('micro');
 const etag = require('etag');
+const compress = require('micro-compress');
 
 const defaultOptions = {
     source: undefined
@@ -28,6 +29,6 @@ module.exports = (opts) => {
         res.setHeader('Content-Type', mime.lookup(filePath));
         res.setHeader('ETag', etag(fileContents));
 
-        return send(res, 200, fileContents);
+        return compress(send(res, 200, fileContents));
     };
 };
