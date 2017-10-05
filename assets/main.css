@@ -1,12 +1,16 @@
 .is-centered {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #max {
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 a {
-    color: #207FCC;
+  color: #207fcc;
+}
+
+.hero {
+  background-color: #fafafa;
 }
