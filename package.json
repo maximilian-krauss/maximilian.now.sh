@@ -6,9 +6,11 @@
   "license": "MIT",
   "scripts": {
     "start": "micro",
-    "dev": "micro-dev"
+    "dev": "micro-dev",
+    "test": "xo"
   },
   "dependencies": {
+    "axios": "^0.17.0",
     "etag": "^1.8.0",
     "finalhandler": "^1.0.4",
     "fs-extra-promise": "^1.0.1",
@@ -23,6 +25,14 @@
   },
   "devDependencies": {
     "eslint": "^4.4.1",
-    "micro-dev": "^1.1.2"
+    "micro-dev": "^1.1.2",
+    "xo": "^0.18.2"
+  },
+  "xo": {
+    "spaces": 2,
+    "rules": {
+      "object-curly-spacing": 0,
+      "indent": 0
+    }
   }
 }

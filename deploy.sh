@@ -1,5 +1,5 @@
 #!/bin/sh
 
-now --public \
+now \
     && now alias \
     && now rm maximilian --safe --yes

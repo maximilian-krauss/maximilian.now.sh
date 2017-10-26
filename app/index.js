@@ -1,17 +1,17 @@
-// packages
-const { send } = require('micro');
+// Packages
+const {send} = require('micro');
 const Router = require('router');
 const finalhandler = require('finalhandler');
 
-// mine
+// Mine
+const socialServices = require('../social.json');
 const serveStatic = require('./micro-static');
 const html = require('./serve-html');
-const socialServices = require('../social.json');
 const tracker = require('./tracker');
 
 const router = new Router();
 
-const serveNotFound = (req, res) => send(res, 404, { error: 'Not found' });
+const serveNotFound = (req, res) => send(res, 404, {error: 'Not found'});
 
 const goSocial = (req, res) => {
   const service = req.params.social;
