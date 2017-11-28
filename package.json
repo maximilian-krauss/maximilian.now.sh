@@ -5,27 +5,25 @@
   "author": "Maximilian Krauß <max@krauss.io>",
   "license": "MIT",
   "scripts": {
-    "start": "micro",
-    "dev": "micro-dev",
+    "start": "node ./www/",
+    "dev": "nodemon ./www/",
     "test": "xo"
   },
   "dependencies": {
     "axios": "^0.17.0",
-    "etag": "^1.8.1",
-    "finalhandler": "^1.1.0",
-    "fs-extra-promise": "^1.0.1",
-    "micro": "^9.0.0",
-    "micro-compress": "^1.0.0",
-    "mime-types": "^2.1.17",
-    "router": "^1.3.2"
+    "compression": "^1.7.1",
+    "express": "^4.16.2",
+    "express-boom": "^2.0.0",
+    "express-pino-logger": "^2.0.0",
+    "helmet": "^3.9.0"
   },
   "now": {
     "name": "maximilian",
     "alias": "krauss.io"
   },
   "devDependencies": {
-    "eslint": "^4.10.0",
-    "micro-dev": "^1.3.0",
+    "eslint": "^4.12.0",
+    "nodemon": "^1.12.1",
     "xo": "^0.18.2"
   },
   "xo": {
