@@ -1,5 +1,5 @@
 #!/bin/sh
 
-now \
+now -E .env \
     && now alias \
     && now rm maximilian --safe --yes
