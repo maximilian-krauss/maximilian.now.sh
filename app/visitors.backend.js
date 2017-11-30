@@ -27,14 +27,8 @@ const incrementField = async (service, field) => {
   await db.close();
 };
 
-module.exports.incrementIncoming = async service => {
-  await incrementField(service, 'incoming');
-};
-
-module.exports.incrementOutgoing = async service => {
-  await incrementField(service, 'outgoing');
-};
-
+module.exports.incrementIncoming = async service => await incrementField(service, 'incoming');
+module.exports.incrementOutgoing = async service => await incrementField(service, 'outgoing');
 module.exports.getData = async () => {
   const db = await MongoClient.connect(mongodbUri);
   const collection = db.collection(mongodbCollection);

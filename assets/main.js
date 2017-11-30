@@ -1,8 +1,14 @@
 console.log('hi');
 
+var sendRequest = function(url) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', url, true);
+  xhr.send();
+};
+
 var handleClickFromElement = function() {
   var serviceName = this.getAttribute('data-service');
-  window.axios.post('./track/' + serviceName).catch(err => console.error(err));
+  sendRequest('./track/' + serviceName);
 };
 
 var attachListener = function() {
