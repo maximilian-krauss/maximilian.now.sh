@@ -1059,11 +1059,11 @@ express-boom@^2.0.0:
   dependencies:
     boom "3.2.x"
 
-express-pino-logger@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/express-pino-logger/-/express-pino-logger-2.0.0.tgz#e2b1046a8e9a9fe65d4e7fcbe57115e28df076a1"
+express-pino-logger@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/express-pino-logger/-/express-pino-logger-3.0.1.tgz#31befe82ed4f1d685d90eeb035923c0c79fe95cc"
   dependencies:
-    pino-http "^2.0.0"
+    pino-http "^3.0.1"
 
 express@^4.16.2:
   version "4.16.2"
@@ -2485,13 +2485,13 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
-pino-http@^2.0.0:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/pino-http/-/pino-http-2.6.2.tgz#aedb71b08d15bc69d959870bafa6b7780103274f"
+pino-http@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/pino-http/-/pino-http-3.0.1.tgz#015376250968b22f709e1260dcb516b691e27c6d"
   dependencies:
-    pino "^4.0.2"
+    pino "^4.10.2"
 
-pino@^4.0.2:
+pino@^4.10.2:
   version "4.10.2"
   resolved "https://registry.yarnpkg.com/pino/-/pino-4.10.2.tgz#77e93cdfa1cdb58f688cbb0abaebe67eb2f315f4"
   dependencies:
