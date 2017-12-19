@@ -15,7 +15,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "express-boom": "^2.0.0",
-    "express-pino-logger": "^2.0.0",
+    "express-pino-logger": "^3.0.1",
     "helmet": "^3.9.0",
     "mongodb": "^2.2.33"
   },
