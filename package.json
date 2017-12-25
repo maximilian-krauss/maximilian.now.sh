@@ -24,7 +24,7 @@
     "alias": "krauss.io"
   },
   "devDependencies": {
-    "eslint": "^4.13.1",
+    "eslint": "^4.14.0",
     "nodemon": "^1.13.3",
     "xo": "^0.18.2"
   },
