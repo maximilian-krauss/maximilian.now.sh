@@ -17,7 +17,7 @@
     "express-boom": "^2.0.0",
     "express-pino-logger": "^3.0.1",
     "helmet": "^3.9.0",
-    "mongodb": "^2.2.33"
+    "mongodb": "^3.0.1"
   },
   "now": {
     "name": "maximilian",
