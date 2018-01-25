@@ -7,7 +7,8 @@ const mongodbCollection = 'service-tracking';
 const defaultServiceEntity = { outgoing: 0, incoming: 0 };
 
 const incrementField = async (service, field) => {
-  const db = await MongoClient.connect(mongodbUri);
+  const client = await MongoClient.connect(mongodbUri);
+  const db = client.db('web');
   const collection = db.collection(mongodbCollection);
   const storedDocument = await collection.findOne({ service });
 
@@ -24,17 +25,19 @@ const incrementField = async (service, field) => {
   entity[field]++;
 
   await collection.replaceOne({ service }, entity, { upsert: true });
-  await db.close();
+  await client.close();
 };
 
 module.exports.incrementIncoming = async service => await incrementField(service, 'incoming');
 module.exports.incrementOutgoing = async service => await incrementField(service, 'outgoing');
 module.exports.getData = async () => {
-  const db = await MongoClient.connect(mongodbUri);
+  const client = await MongoClient.connect(mongodbUri);
+
+  const db = client.db('web');
   const collection = db.collection(mongodbCollection);
   const documents = await collection.find().toArray();
 
-  await db.close();
+  await client.close();
 
   return documents.map(item => {
     return {
