@@ -1,6 +1,16 @@
+body {
+  background-color: #000;
+  color: #fff;
+}
+
 .is-centered {
   margin-left: auto;
   margin-right: auto;
+}
+
+.title,
+.subtitle {
+  color: #fff;
 }
 
 #max {
@@ -10,7 +20,10 @@
 a {
   color: #207fcc;
 }
+a:hover {
+  color: #fff;
+}
 
 .hero {
-  background-color: #fafafa;
+  background-color: #070707;
 }
