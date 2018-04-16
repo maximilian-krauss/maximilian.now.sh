@@ -12,20 +12,20 @@
   "dependencies": {
     "axios": "^0.18.0",
     "compression": "^1.7.2",
-    "dotenv": "^5.0.0",
-    "express": "^4.16.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
     "express-boom": "^2.0.0",
     "express-pino-logger": "^3.0.1",
-    "helmet": "^3.11.0",
-    "mongodb": "^3.0.3"
+    "helmet": "^3.12.0",
+    "mongodb": "^3.0.6"
   },
   "now": {
     "name": "maximilian",
     "alias": "krauss.io"
   },
   "devDependencies": {
-    "eslint": "^4.18.1",
-    "nodemon": "^1.15.1",
+    "eslint": "^4.19.1",
+    "nodemon": "^1.17.3",
     "xo": "^0.20.3"
   },
   "xo": {
