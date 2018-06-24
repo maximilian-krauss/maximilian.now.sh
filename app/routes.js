@@ -1,49 +1,70 @@
-// native
-const path = require('path');
+// Npm
+const { notFound } = require('boom');
 
-// npm
-const { Router } = require('express');
-
-// mine
-const { asyncMiddleware } = require('./utils');
+// Mine
 const socialServices = require('../social.json');
-const htmlRoot = path.join(__dirname, '..', 'html');
 const visitors = require('./visitors');
 
-const trackIncoming = async (req, res, next) => {
-  next();
-  await visitors.trackIncoming(req.get('referer'));
-};
-const trackOutgoing = async (req, res, next) => {
-  const serviceName = req.params.social;
-  const service = socialServices[serviceName];
-  if (service === undefined) return res.boom.notFound();
+module.exports.register = async server => {
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: async (request, h) => {
+      const { referer } = request.headers;
+      await visitors.trackIncoming(referer);
 
-  await visitors.trackOutgoing(serviceName);
-  res.status(204).send();
-};
+      return h.file('html/index.html');
+    }
+  });
 
-const serveIndex = (_, res) => res.sendFile('index.html', { root: htmlRoot });
-const serveRobotsFile = (_, res) => res.type('text/plain').send('User-agent: *\r\nAllow: /');
-const serveTracking = async (_, res, next) => res.json(await visitors.getData());
+  server.route({
+    method: 'GET',
+    path: '/static/{param*}',
+    handler: {
+      directory: {
+        path: 'assets'
+      }
+    }
+  });
 
-const redirectToSocialService = (req, res) => {
-  const serviceName = req.params.social;
-  const service = socialServices[serviceName];
-  if (service === undefined) return res.boom.notFound();
+  server.route({
+    method: 'GET',
+    path: '/on/{social}',
+    handler: async (request, h) => {
+      const serviceName = request.params.social;
+      const service = socialServices[serviceName];
+      if (service === undefined) {
+return notFound();
+}
 
-  res.redirect(service.url);
-};
+      return h.redirect(service.url);
+    }
+  });
 
-module.exports = () => {
-  const router = Router();
+  server.route({
+    method: 'POST',
+    path: '/track/{social}',
+    handler: async (request, h) => {
+      const serviceName = request.params.social;
+      const service = socialServices[serviceName];
+      if (service === undefined) {
+return notFound();
+}
 
-  router.get('/', asyncMiddleware(trackIncoming));
-  router.get('/', serveIndex);
-  router.get('/on/:social', redirectToSocialService);
-  router.post('/track/:social', asyncMiddleware(trackOutgoing));
-  router.get('/robots.txt', serveRobotsFile);
-  router.get('/tracking', asyncMiddleware(serveTracking));
+      await visitors.trackOutgoing(serviceName);
+      return h.response().code(204);
+    }
+  });
 
-  return router;
+  server.route({
+    method: 'GET',
+    path: '/tracking',
+    handler: async () => visitors.getData()
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/robots.txt',
+    handler: () => 'User-agent: *\r\nAllow: /'
+  });
 };

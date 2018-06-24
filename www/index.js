@@ -1,10 +1,19 @@
-require('dotenv').load({ silent: true });
-
+require('dotenv').config({ silent: true });
 const app = require('../app');
-const port = process.env.PORT || '3000';
+const logger = require('./../app/logger');
 
-app.set('port', port);
+async function startup() {
+    const server = await app();
+    await server.start();
+}
 
-app.listen(port, () => {
-  console.log(`Server is running and listening on http://localhost:${port}`);
+process.on('unhandledRejection', err => {
+    logger.error(err);
+    process.exit(1);
 });
+
+startup()
+    .catch(err => {
+        logger.error(err);
+        process.exit(1);
+    });

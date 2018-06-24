@@ -1,28 +1,34 @@
-// npm
-const express = require('express');
-const pino = require('express-pino-logger')();
-const boom = require('express-boom');
-const helmet = require('helmet');
-const compression = require('compression');
+// Npm
+const Hapi = require('hapi');
 
-// mine
+// Mine
 const routes = require('./routes');
+const config = require('./config');
+const logger = require('./logger');
 
-const app = express();
+const registerRoutes = async server => {
+  await routes.register(server);
+};
 
-app.set('etag', 'strong');
+const registerPlugins = async server => {
+  await server.register(require('inert'));
+  await server.register({
+    plugin: require('hapi-pino'),
+    options: {
+      instance: logger
+    }
+  });
+};
 
-app.use(compression());
-app.use(helmet());
-app.use(pino);
-app.use(boom());
-app.use('/static', express.static('assets', {}));
-app.use(routes());
+const prepareApp = async () => {
+  const server = Hapi.server({
+    port: config.port
+  });
 
-app.use((req, res) => res.boom.notFound());
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.boom.internal('Unhandled internal server error');
-});
+  await registerPlugins(server);
+  await registerRoutes(server);
 
-module.exports = app;
+  return server;
+};
+
+module.exports = prepareApp;

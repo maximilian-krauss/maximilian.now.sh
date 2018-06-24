@@ -1,5 +1,5 @@
 #!/bin/sh
 
-now -E .env -C -f --region bru \
+now -E .env.prod -C \
     && now alias \
     && now rm maximilian --safe --yes
