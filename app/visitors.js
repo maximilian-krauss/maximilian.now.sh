@@ -10,13 +10,13 @@ const getSocialServiceBy = referer =>
 
 module.exports.trackIncoming = async referer => {
   if (referer === undefined) {
-return;
-}
+    return;
+  }
 
   const socialService = getSocialServiceBy(referer);
   if (socialService === undefined) {
-return;
-}
+    return;
+  }
 
   await backend.incrementIncoming(socialService.name);
 };
