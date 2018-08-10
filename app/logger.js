@@ -1,7 +1,7 @@
-const Pino = require('pino');
+const Pino = require('pino')
 
 const pinoInstance = Pino({
-    prettyPrint: process.env.NODE_ENV !== 'production'
-});
+  prettyPrint: process.env.NODE_ENV !== 'production'
+})
 
-module.exports = pinoInstance;
+module.exports = pinoInstance
